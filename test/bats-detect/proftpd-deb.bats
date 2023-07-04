@@ -10,7 +10,7 @@ setup_file() {
 
 teardown_file() {
     load "../lib/teardown_file.sh"
-    deb-remove proftpd
+    deb-remove proftpd proftpd-core
 }
 
 setup() {
@@ -32,6 +32,7 @@ setup() {
 
 @test "proftpd: install" {
     run -0 deb-install proftpd
+    run -0 sudo systemctl unmask proftpd.service
     run -0 sudo systemctl enable proftpd.service
 }
 
